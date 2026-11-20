@@ -222,3 +222,39 @@ Tool names and schemas are discoverable via MCP `tools/list`. Invoke using MCP `
 - No implementation-plan answer for PROJ-101.
 
 You are expected to build these during the timed test.
+
+---
+
+## Roadmap
+
+Status as of 2026-11-20.
+
+### Done
+
+- **Jira issue fetch** — `fetch_jira_issue` calls `GET /jira/issues/{key}`.
+- **GitHub repository metadata** — `fetch_github_repository` uses the issue's `github_owner` and `repository`.
+- **Source file retrieval** — `retrieve_source_files` reads every path in the repository's `files` list via `GET /github/repos/{owner}/{repo}/file`.
+- **Implementation plan** — `generate_implementation_plan` calls ChatOllama (`llama3.1:8b`, `agent/llm.py`).
+- **Human approval gate** — `human_approval` uses LangGraph `interrupt()` and pauses until a decision is supplied.
+- **Code generation** — `implement_code` asks the model for JSON output and refuses to run unless the plan is approved.
+- **Simulated file writes** — `write_generated_files` writes to `working_repo/`. No git operations are performed.
+- **Manual end-to-end script** — `agent/nodes_test.py` runs the nodes in order. It auto-approves the plan.
+
+### In progress
+
+- **LangGraph orchestration** — the nodes are not yet wired into one `StateGraph` with routing. The test script builds a one-node graph only for the approval step.
+- **Output quality** — generated code and its coverage of the acceptance criteria have not been reviewed.
+
+### To do
+
+- **Branch creation** — `POST /github/repos/{owner}/{repo}/branches` with a predictable name such as `feature/PROJ-101-...`.
+- **Pull request creation** — `POST /github/repos/{owner}/{repo}/pulls` with an idempotency key. A duplicate key returns the existing PR.
+- **Jira update** — add a comment containing the PR URL (`POST /jira/issues/{key}/comments`) and set the status to In Progress (`PATCH /jira/issues/{key}`).
+- **Denied approval path** — stop before any branch, PR, Jira, or Slack side effect.
+- **Edge cases** — unknown issue, missing repository mapping, and empty acceptance criteria. Each should return a clear message rather than invent details.
+- **GitHub retries** — bounded retry with backoff. Keep workflow state if a call fails.
+- **MCP integration** — a client adapter that discovers tools with `tools/list` and invokes them with `tools/call`, sharing the same business layer as the REST adapter.
+- **Optional extras** — Slack notification, and surfacing the quality-scan warning in the plan.
+- **Tests and logging** — pytest coverage for the nodes and graph routing. Logs must not include tokens or secrets.
+- **Dependencies** — `requirements.txt` is missing `requests`, `python-dotenv`, and `langgraph`. They are installed in `.venv` but not recorded in the file.
+- **Run instructions** — document how to run the agent and give a demo walkthrough.
