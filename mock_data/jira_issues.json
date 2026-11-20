@@ -1,0 +1,109 @@
+{
+  "issues": [
+    {
+      "key": "PROJ-101",
+      "summary": "Add patient HbA1c report endpoint",
+      "description": "Create an endpoint that returns the latest HbA1c result for a patient. Follow existing service patterns and return a clear not-found response when no result exists.",
+      "status": "To Do",
+      "priority": "High",
+      "assignee": "Rajendra",
+      "reporter": "Maya",
+      "github_owner": "acme-health",
+      "repository": "healthcare-backend",
+      "acceptance_criteria": [
+        "Accept patient_id as a path parameter.",
+        "Return the latest HbA1c result for that patient.",
+        "Return 404 when the patient or matching result is missing.",
+        "Validate patient_id and return a clear 422 response for invalid input.",
+        "Add unit tests for success, missing result, and invalid input."
+      ],
+      "labels": [
+        "backend",
+        "healthcare",
+        "lab"
+      ],
+      "comments": []
+    },
+    {
+      "key": "PROJ-102",
+      "summary": "Fix medication API timeout",
+      "description": "Investigate slow medication history retrieval and add a bounded timeout.",
+      "status": "In Progress",
+      "priority": "Medium",
+      "assignee": "Dev Team",
+      "reporter": "Maya",
+      "github_owner": "acme-health",
+      "repository": "healthcare-backend",
+      "acceptance_criteria": [
+        "Apply a configurable timeout.",
+        "Return a controlled error when downstream service times out.",
+        "Add a timeout test."
+      ],
+      "labels": [
+        "backend",
+        "performance"
+      ],
+      "comments": []
+    },
+    {
+      "key": "PROJ-103",
+      "summary": "Add insurance claim status endpoint",
+      "description": "Expose claim status by claim identifier.",
+      "status": "To Do",
+      "priority": "Medium",
+      "assignee": "Dev Team",
+      "reporter": "Noah",
+      "github_owner": "acme-health",
+      "repository": "insurance-service",
+      "acceptance_criteria": [
+        "Accept claim_id.",
+        "Return claim status.",
+        "Return 404 for unknown claim.",
+        "Add endpoint tests."
+      ],
+      "labels": [
+        "insurance",
+        "api"
+      ],
+      "comments": []
+    },
+    {
+      "key": "PROJ-104",
+      "summary": "Document patient API error responses",
+      "description": "Document error response formats for patient-facing APIs.",
+      "status": "Backlog",
+      "priority": "Low",
+      "assignee": "Unassigned",
+      "reporter": "Maya",
+      "github_owner": "acme-health",
+      "repository": "healthcare-backend",
+      "acceptance_criteria": [
+        "Document 400, 404, and 422 response examples."
+      ],
+      "labels": [
+        "documentation"
+      ],
+      "comments": []
+    },
+    {
+      "key": "PROJ-105",
+      "summary": "Send deployment notification to Slack",
+      "description": "Notify the engineering channel after a successful deployment.",
+      "status": "To Do",
+      "priority": "Low",
+      "assignee": "Dev Team",
+      "reporter": "Noah",
+      "github_owner": "acme-health",
+      "repository": "healthcare-backend",
+      "acceptance_criteria": [
+        "Send service name and deployment version.",
+        "Do not send notification for failed deployments."
+      ],
+      "labels": [
+        "automation",
+        "slack"
+      ],
+      "comments": []
+    }
+  ]
+}

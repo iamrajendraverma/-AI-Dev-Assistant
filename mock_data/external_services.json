@@ -1,0 +1,38 @@
+{
+  "quality_scans": {
+    "healthcare-backend": {
+      "status": "completed",
+      "quality_gate": "passed",
+      "bugs": 0,
+      "vulnerabilities": 0,
+      "code_smells": 3,
+      "coverage_percent": 82.5
+    },
+    "insurance-service": {
+      "status": "completed",
+      "quality_gate": "warning",
+      "bugs": 1,
+      "vulnerabilities": 0,
+      "code_smells": 5,
+      "coverage_percent": 71.0
+    }
+  },
+  "deployments": {
+    "healthcare-backend": {
+      "status": "success",
+      "version": "1.8.2",
+      "environment": "staging"
+    },
+    "insurance-service": {
+      "status": "failed",
+      "version": "0.9.4",
+      "environment": "staging",
+      "reason": "Health check failed"
+    }
+  },
+  "slack_channels": [
+    "#engineering",
+    "#healthcare-backend",
+    "#releases"
+  ]
+}

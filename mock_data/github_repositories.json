@@ -1,0 +1,30 @@
+{
+  "repositories": [
+    {
+      "owner": "acme-health",
+      "name": "healthcare-backend",
+      "default_branch": "main",
+      "description": "Mock patient and clinical data APIs",
+      "language": "Python",
+      "files": [
+        "app.py",
+        "patient_service.py",
+        "lab_service.py",
+        "medication_service.py",
+        "tests/test_lab.py"
+      ]
+    },
+    {
+      "owner": "acme-health",
+      "name": "insurance-service",
+      "default_branch": "main",
+      "description": "Mock insurance claim APIs",
+      "language": "Python",
+      "files": [
+        "app.py",
+        "claim_service.py",
+        "tests/test_claim.py"
+      ]
+    }
+  ]
+}
